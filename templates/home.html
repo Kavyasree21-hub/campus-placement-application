@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<section class="py-5 text-center" style="background: linear-gradient(to right, #117a6b, #0f766e); color: white;">
+    <div class="container">
+        <h1 class="fw-bold display-5">Welcome to Placement Portal</h1>
+        <p class="lead mt-3">Your gateway to top companies and successful careers</p>
+        <a href="/login" class="btn btn-light mt-3">Get Started</a>
+    </div>
+</section>
+
+
+<div class="container py-5">
+
+    <h3 class="section-title text-center">Why Use This Portal?</h3>
+
+    <div class="row g-4 mt-2">
+
+        
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <img src="{{ url_for('static', filename='icons/student.png') }}" 
+                     alt="Student" width="80" class="mx-auto mb-3">
+                <h5>Student Profiles</h5>
+                <p class="text-muted">Create professional profiles and showcase your skills.</p>
+            </div>
+        </div>
+
+        
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <img src="{{ url_for('static', filename='icons/company.png') }}" 
+                     alt="Company" width="80" class="mx-auto mb-3">
+                <h5>Company Access</h5>
+                <p class="text-muted">Top companies post jobs and recruit students easily.</p>
+            </div>
+        </div>
+
+        
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <img src="{{ url_for('static', filename='icons/tracking.png') }}" 
+                     alt="Tracking" width="80" class="mx-auto mb-3">
+                <h5>Track Progress</h5>
+                <p class="text-muted">Monitor applications and placement status in real-time.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container page-block">
+    <div class="highlight-card text-center">
+        <h4>Fast, Transparent & Reliable Placement System</h4>
+        <p class="mb-0">Built for students, companies, and administrators</p>
+    </div>
+</div>
+
+
+<div class="container py-4">
+    <div class="row text-center">
+
+        <div class="col-md-4">
+            <div class="stats-card p-4 bg-white">
+                <h2 class="fw-bold">500+</h2>
+                <p>Students Placed</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stats-card p-4 bg-white">
+                <h2 class="fw-bold">100+</h2>
+                <p>Companies</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stats-card p-4 bg-white">
+                <h2 class="fw-bold">1000+</h2>
+                <p>Applications</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container text-center py-5">
+    <h3>Start Your Placement Journey Today</h3>
+    <p class="text-muted">Register and apply to your dream companies</p>
+    
+</div>
+
+{% endblock %}

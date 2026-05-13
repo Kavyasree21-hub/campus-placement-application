@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="mb-3">All Students</h3>
+
+<form method="GET" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="search" value="{{ request.args.get('search','') }}" class="form-control" placeholder="Search by name or ID">
+        <button class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<div class="table-responsive">
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.id }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.email }}</td>
+
+            <td>
+                {% if s.is_blacklisted %}
+                    <span class="badge bg-danger">Blacklisted</span>
+                {% else %}
+                    <span class="badge bg-success">Active</span>
+                {% endif %}
+            </td>
+
+            <td class="d-flex gap-2">
+                <a href="{{ url_for('admin.blacklist_student', id=s.id) }}" class="btn btn-warning btn-sm">Blacklist</a>
+                <a href="{{ url_for('admin.delete_student', id=s.id) }}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

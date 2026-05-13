@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-block d-flex justify-content-between align-items-center">
+    <h3 class="mb-0">Students Applied</h3>
+    <a href="/company/dashboard" class="btn btn-secondary px-4">Back</a>
+</div>
+
+<div class="table-wrap">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Application ID</th>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Resume</th>
+                <th>Applied on</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for app in applications %}
+            <tr>
+                <td>{{ app.id }}</td>
+                <td>{{ app.student.id }}</td>
+                <td>{{ app.student.name }}</td>
+                <td>
+                    {% if app.student.resume %}
+                    <a href="/{{ app.student.resume|replace('\\', '/') }}" target="_blank" class="btn btn-secondary btn-sm px-3">
+                        View Resume
+                    </a>
+                    {% else %}
+                    <span class="badge bg-secondary">Not uploaded</span>
+                    {% endif %}
+                </td>
+                <td>{{ app.application_date.strftime("%d-%m-%Y %H:%M") }}</td>
+                <td>{{ app.status }}</td>
+                <td class="d-flex gap-2">
+                    <a href="/update_status/{{ app.id }}/Shortlisted" class="btn btn-warning btn-sm px-3">Shortlist</a>
+                    <a href="/update_status/{{ app.id }}/Selected" class="btn btn-success btn-sm px-3">Select</a>
+                    <a href="/update_status/{{ app.id }}/Rejected" class="btn btn-danger btn-sm px-3">Reject</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

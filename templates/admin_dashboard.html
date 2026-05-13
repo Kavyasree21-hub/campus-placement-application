@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-block d-flex justify-content-between align-items-center">
+    <h3 class="mb-0">Admin Dashboard</h3>
+</div>
+
+
+<div class="row g-3 page-block">
+    <div class="col-md-6 col-lg-3">
+        <div class="card stats-card  stats-blue text-white h-100">
+            <div class="card-body">
+                <h6 class="mb-1">Total Students</h6>
+                <h3 class="mb-0">{{ students }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card stats-card stats-purple text-white h-100">
+            <div class="card-body">
+                <h6 class="mb-1">Total Companies</h6>
+                <h3 class="mb-0">{{ companies }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card stats-card stats-rose text-white h-100">
+            <div class="card-body">
+                <h6 class="mb-1">Placement Drives</h6>
+                <h3 class="mb-0">{{ drives }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card stats-card stats-red text-white h-100">
+            <div class="card-body">
+                <h6 class="mb-1">Applications</h6>
+                <h3 class="mb-0">{{ applications }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-flex gap-3 mb-4">
+    <a href="{{ url_for('admin.view_students') }}" class="btn btn-primary">
+        View Students
+    </a>
+
+    <a href="{{ url_for('admin.view_companies') }}" class="btn btn-success">
+        View Companies
+    </a>
+
+    <a href="{{ url_for('admin.view_drives') }}" class="btn btn-warning">
+        View Drives
+    </a>
+</div>
+
+
+<h4 class="section-title">Pending Company Approvals</h4>
+<div class="table-wrap page-block">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for company in pending_companies %}
+            <tr>
+                <td>{{ company.id }}</td>
+                <td>{{ company.company_name }}</td>
+                <td class="d-flex gap-2">
+                    <a href="{{ url_for('admin.approve_company', id=company.id) }}" class="btn btn-success btn-sm px-3">Approve</a>
+                    <a href="{{ url_for('admin.reject_company', id=company.id) }}" class="btn btn-danger btn-sm px-3">Reject</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if pending_companies|length == 0 %}
+<div class="alert alert-info mt-3">
+    No pending company approvals
+</div>
+{% endif %}
+</div>
+
+{% endblock %}

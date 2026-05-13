@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="mb-3">All Companies</h3>
+
+<form method="GET" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="search" value="{{ request.args.get('search','') }}" class="form-control" placeholder="Search by name or ID">
+        <button class="btn btn-success">Search</button>
+    </div>
+</form>
+
+<div class="table-responsive">
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Company Name</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for c in companies %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.company_name }}</td>
+
+            <td>
+                {% if c.is_blacklisted %}
+                    <span class="badge bg-danger">Blacklisted</span>
+                {% elif c.approved %}
+                    <span class="badge bg-success">Approved</span>
+                {% else %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                {% endif %}
+            </td>
+
+            <td class="d-flex gap-2 flex-wrap">
+                {% if not c.approved %}
+                    <a href="{{ url_for('admin.approve_company', id=c.id) }}" class="btn btn-success btn-sm">Approve</a>
+                    <a href="{{ url_for('admin.reject_company', id=c.id) }}" class="btn btn-danger btn-sm">Reject</a>
+                {% endif %}
+
+                <a href="{{ url_for('admin.blacklist_company', id=c.id) }}" class="btn btn-warning btn-sm">Blacklist</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

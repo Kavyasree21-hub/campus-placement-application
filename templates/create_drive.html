@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-page">
+    <div class="col-md-8 col-lg-7">
+        <div class="card">
+            <div class="card-header py-3">
+                <h4 class="mb-0">Create Placement Drive</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" name="title" class="form-control {% if errors.title %}is-invalid{% endif %}" value="{{ form_data.title if form_data else '' }}">
+                        {% if errors.title %}
+                        <div class="invalid-feedback">
+                            {{ errors.title }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control">{{ form_data.description if form_data else '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Eligibility</label>
+                        <input type="text" name="eligibility" class="form-control {% if errors.eligibility %}is-invalid{% endif %}" value="{{ form_data.eligibility if form_data else '' }}">
+                        {% if errors.eligibility %}
+                        <div class="invalid-feedback">
+                            {{ errors.eligibility }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Deadline</label>
+                        <input type="date" name="deadline" class="form-control {% if errors.deadline %}is-invalid{% endif %}" value="{{ form_data.deadline if form_data else '' }}">
+                        {% if errors.deadline %}
+                        <div class="invalid-feedback">
+                            {{ errors.deadline }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <button class="btn btn-success px-4">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

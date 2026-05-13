@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-page">
+    <div class="col-md-7 col-lg-6">
+        <div class="card">
+            <div class="card-header py-3">
+                <h4 class="mb-0">Student Registration</h4>
+            </div>
+            <div class="card-body p-4">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                  {% endfor %}
+                {% endwith %}
+
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">Name<span class="text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email<span class="text-danger">*</span></label>
+                        <input type="email" name="email" class="form-control" placeholder="example@gmail.com" required >
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password<span class="text-danger">*</span></label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Upload Resume (PDF only)<span class="text-danger">*</span></label>
+                        <input type="file" name="resume" accept=".pdf,application/pdf" class="form-control" required>
+                    </div>
+                    <button class="btn btn-success px-4">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

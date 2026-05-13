@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-block d-flex justify-content-between align-items-center">
+    <h3 class="mb-0">Student Profile</h3>
+    <a href="/student/dashboard" class="btn btn-secondary px-4">Back</a>
+</div>
+
+<div class="row g-4">
+
+    <!-- Edit Profile -->
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header py-3">
+                <h5 class="mb-0">Edit Profile</h5>
+            </div>
+
+            <div class="card-body p-4">
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endwith %}
+
+                <form method="POST" enctype="multipart/form-data">
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name"
+                               value="{{ student.name }}"
+                               class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email"
+                               value="{{ student.email }}"
+                               class="form-control">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Change Password</label>
+                        <input type="password" name="password"
+                               class="form-control"
+                               placeholder="Leave blank to keep current password">
+                    </div>
+                     <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" name="phone"
+                               value="{{ student.phone }}"
+                               class="form-control"
+                               placeholder="10-digit number"
+                               pattern="[0-9]{10}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Branch</label>
+                        <input type="text" name="branch"
+                               value="{{ student.branch }}"
+                               class="form-control"
+                               placeholder="CSE / ECE / IT">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Year</label>
+                        <select name="year" class="form-control">
+                            <option value="">Select Year</option>
+                            <option {% if student.year == "1" %}selected{% endif %}>1</option>
+                            <option {% if student.year == "2" %}selected{% endif %}>2</option>
+                            <option {% if student.year == "3" %}selected{% endif %}>3</option>
+                            <option {% if student.year == "4" %}selected{% endif %}>4</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">CGPA</label>
+                        <input type="number" step="0.01" min="0" max="10"
+                               name="cgpa"
+                               value="{{ student.cgpa }}"
+                               class="form-control"
+                               placeholder="e.g. 8.5">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Skills</label>
+                        <input type="text" name="skills"
+                               value="{{ student.skills }}"
+                               class="form-control"
+                               placeholder="Python, SQL, ML">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Upload New Resume (PDF)</label>
+                        <input type="file" name="resume"
+                               class="form-control"
+                               accept=".pdf">
+                    </div>
+
+                    <button class="btn btn-success px-4">Update Profile</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
