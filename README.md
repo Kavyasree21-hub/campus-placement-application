@@ -1,6 +1,6 @@
 # Campus-Placement-Application
 
-A Flask-based web application designed to streamline campus placement activities by enabling seamless interaction between students,companies and administrators.
+A Flask-based web application designed for campus placement activities by enabling interaction between students,companies and administrators.
 
 
 In this system,
@@ -18,4 +18,5 @@ Student,Company,PlacementDrive,Application and Admin with proper one-to-many rel
 
 
 Video Presentation
-Drive Link
+
+Drive Link: https://drive.google.com/file/d/1MMK3QD0oXzWNu57DSbKY8_WHX6WkbwuT/view?usp=sharing
